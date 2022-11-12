@@ -29,7 +29,7 @@ namespace DataGridView_Adm_Com
             Text = "Редактирование студента";
             textBoxFIO.Text = source.FullName;
             comboBoxSex.SelectedItem = source.Gender;
-            dateTimePicker_BirthDate.Value = entrant.BirthDate;
+            dateTimePicker_BirthDate.Value = source.BirthDate;
             comboBoxEducationForm.SelectedItem = source.EducationForm;
             textBoxMathExams.Text = source.MathExams.ToString();
             textBoxRussianExams.Text = source.RussianExams.ToString();
