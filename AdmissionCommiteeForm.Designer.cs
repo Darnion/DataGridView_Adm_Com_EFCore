@@ -163,7 +163,7 @@
             // toolStripMenuItem_Close
             // 
             this.toolStripMenuItem_Close.Name = "toolStripMenuItem_Close";
-            this.toolStripMenuItem_Close.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem_Close.Size = new System.Drawing.Size(120, 22);
             this.toolStripMenuItem_Close.Text = "Закрыть";
             this.toolStripMenuItem_Close.Click += new System.EventHandler(this.toolStripMenuItem_Close_Click);
             // 
@@ -209,6 +209,7 @@
             this.toolStripMenuItem_Delete.Name = "toolStripMenuItem_Delete";
             this.toolStripMenuItem_Delete.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItem_Delete.Text = "Удалить";
+            this.toolStripMenuItem_Delete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // statusStrip1
             // 
