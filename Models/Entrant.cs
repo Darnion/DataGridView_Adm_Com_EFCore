@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataGridView_Adm_Com.Models
 {
@@ -11,6 +7,11 @@ namespace DataGridView_Adm_Com.Models
     /// </summary>
     public class Entrant
     {
+        /// <summary>
+        /// Идентификатор
+        /// </summary>
+        public int Id { get; set; }
+
         /// <summary>
         /// ФИО
         /// </summary>
@@ -45,5 +46,10 @@ namespace DataGridView_Adm_Com.Models
         /// Баллы по информатике
         /// </summary>
         public int ITExams { get; set; }
+
+        /// <summary>
+        /// Лишнее свойство
+        /// </summary>
+        public string UselessProperty { get; set; }
     }
 }

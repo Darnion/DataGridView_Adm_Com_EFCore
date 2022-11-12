@@ -1,24 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DataGridView_Adm_Com.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataGridView_Adm_Com
 {
     public partial class AdmissionCommiteeForm : Form
     {
-        private readonly List<Entrant> entrants;
-        private readonly BindingSource bindingSource;
+        public DbContextOptions<ApplicationContext> options;
         public AdmissionCommiteeForm()
         {
             InitializeComponent();
+            options = ConnectJSON.Option();
             dataGridView_Adm_Com.AutoGenerateColumns = false;
-            entrants = new List<Entrant>();
-            bindingSource = new BindingSource();
-            bindingSource.DataSource = entrants;
-            dataGridView_Adm_Com.DataSource = bindingSource;
+            dataGridView_Adm_Com.DataSource = ReadDB(options);
         }
 
         private void toolStripMenuItem_Close_Click(object sender, EventArgs e)
@@ -32,8 +29,8 @@ namespace DataGridView_Adm_Com
 
             if (infoForm.ShowDialog(this) == DialogResult.OK)
             {
-                entrants.Add(infoForm.Entrant);
-                bindingSource.ResetBindings(false);
+                CreateDB(options, infoForm.Entrant);
+                dataGridView_Adm_Com.DataSource = ReadDB(options);
             }
         }
 
@@ -78,9 +75,15 @@ namespace DataGridView_Adm_Com
             var infoForm = new EntrantInfoForm(id);
             if (infoForm.ShowDialog(this) == DialogResult.OK)
             {
-                var index = entrants.IndexOf(id);
-                entrants[index] = infoForm.Entrant;
-                bindingSource.ResetBindings(false);
+                id.FullName = infoForm.Entrant.FullName;
+                id.Gender = infoForm.Entrant.Gender;
+                id.BirthDate = infoForm.Entrant.BirthDate;
+                id.EducationForm = infoForm.Entrant.EducationForm;
+                id.MathExams = infoForm.Entrant.MathExams;
+                id.RussianExams = infoForm.Entrant.RussianExams;
+                id.ITExams = infoForm.Entrant.ITExams;
+                UpdateDB(options, id);
+                dataGridView_Adm_Com.DataSource = ReadDB(options);
             }
         }
 
@@ -95,16 +98,67 @@ namespace DataGridView_Adm_Com
             if (MessageBox.Show($"Вы действительно хотите удалить {id.FullName}?",
                 "Удаление записи", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                entrants.Remove(id);
-                bindingSource.ResetBindings(false);
+                RemoveDB(options, id);
+                dataGridView_Adm_Com.DataSource = ReadDB(options);
             }
         }
 
         private void dataGridView_Adm_Com_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            labelAmountEntrant.Text = $"Количество абитуриентов: {entrants.Count()}";
+            labelAmountEntrant.Text = $"Количество абитуриентов: {ReadDB(options).Count}";
 
-            labelAmountPassGrade.Text = $"Количество абитуриентов с проходным баллом (>150): {entrants.Where(pE => pE.MathExams + pE.RussianExams + pE.ITExams > 150).Count()}";
+            labelAmountPassGrade.Text = $"Количество абитуриентов с проходным баллом (>150): {ReadDB(options).Where(pE => pE.MathExams + pE.RussianExams + pE.ITExams > 150).Count()}";
+        }
+
+        private static void CreateDB(DbContextOptions<ApplicationContext> options, Entrant entrant)
+        {
+            using (var db = new ApplicationContext(options))
+            {
+                Entrant t = new Entrant();
+                entrant.Id = t.Id;
+                db.AdmComDB.Add(entrant);
+                db.SaveChanges();
+            }
+        }
+        private static void RemoveDB(DbContextOptions<ApplicationContext> options, Entrant entrant)
+        {
+            using (var db = new ApplicationContext(options))
+            {
+                var value = db.AdmComDB.FirstOrDefault(u => u.Id == entrant.Id);
+                if (value != null)
+                {
+                    db.AdmComDB.Remove(value);
+                    db.SaveChanges();
+                }
+
+            }
+        }
+        private static void UpdateDB(DbContextOptions<ApplicationContext> options, Entrant entrant)
+        {
+            using (var db = new ApplicationContext(options))
+            {
+                var value = db.AdmComDB.FirstOrDefault(u => u.Id == entrant.Id);
+                if (value != null)
+                {
+                    value.FullName = entrant.FullName;
+                    value.Gender = entrant.Gender;
+                    value.BirthDate = entrant.BirthDate;
+                    value.EducationForm = entrant.EducationForm;
+                    value.MathExams = entrant.MathExams;
+                    value.RussianExams = entrant.RussianExams;
+                    value.ITExams = entrant.ITExams;
+                    db.SaveChanges();
+                }
+            }
+        }
+        private static List<Entrant> ReadDB(DbContextOptions<ApplicationContext> options)
+        {
+            using (ApplicationContext db = new ApplicationContext(options))
+            {
+                return db.AdmComDB
+                    .OrderByDescending(x => x.Id)
+                    .ToList();
+            }
         }
     }
 }
