@@ -9,6 +9,8 @@ namespace DataGridView_Adm_Com
 {
     public partial class AdmissionCommiteeForm : Form
     {
+        private bool sortedByAlphabet = false;
+        private bool sortedByMark = false;
         public DbContextOptions<ApplicationContext> options;
         public AdmissionCommiteeForm()
         {
@@ -108,6 +110,15 @@ namespace DataGridView_Adm_Com
             labelAmountEntrant.Text = $"Количество абитуриентов: {ReadDB(options).Count}";
 
             labelAmountPassGrade.Text = $"Количество абитуриентов с проходным баллом (>150): {ReadDB(options).Where(pE => pE.MathExams + pE.RussianExams + pE.ITExams > 150).Count()}";
+
+            if (dataGridView_Adm_Com.SelectedCells.Count > 0)
+            {
+                buttonSort.Enabled = true;
+            }
+            else
+            {
+                buttonSort.Enabled = false;
+            }
         }
 
         private static void CreateDB(DbContextOptions<ApplicationContext> options, Entrant entrant)
@@ -158,6 +169,76 @@ namespace DataGridView_Adm_Com
                 return db.AdmComDB
                     .OrderByDescending(x => x.Id)
                     .ToList();
+            }
+        }
+
+        private static List<Entrant> SortAlphabetUpDB(DbContextOptions<ApplicationContext> options)
+        {
+            using (ApplicationContext db = new ApplicationContext(options))
+            {
+                return db.AdmComDB
+                    .OrderBy(x => x.FullName)
+                    .ToList();
+            }
+        }
+
+        private static List<Entrant> SortAlphabetDownDB(DbContextOptions<ApplicationContext> options)
+        {
+            using (ApplicationContext db = new ApplicationContext(options))
+            {
+                return db.AdmComDB
+                    .OrderByDescending(x => x.FullName)
+                    .ToList();
+            }
+        }
+
+        private static List<Entrant> SortMarkUpDB(DbContextOptions<ApplicationContext> options)
+        {
+            using (ApplicationContext db = new ApplicationContext(options))
+            {
+                return db.AdmComDB
+                    .OrderBy(x => x.MathExams + x.RussianExams + x.ITExams)
+                    .ToList();
+            }
+        }
+
+        private static List<Entrant> SortMarkDownDB(DbContextOptions<ApplicationContext> options)
+        {
+            using (ApplicationContext db = new ApplicationContext(options))
+            {
+                return db.AdmComDB
+                    .OrderByDescending(x => x.MathExams + x.RussianExams + x.ITExams)
+                    .ToList();
+            }
+        }
+
+        private void buttonSort_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            if (e.ClickedItem == buttonAlphabetSort)
+            {
+                if (!sortedByAlphabet)
+                {
+                    dataGridView_Adm_Com.DataSource = SortAlphabetUpDB(options);
+                    sortedByAlphabet = !sortedByAlphabet;
+                }
+                else
+                {
+                    dataGridView_Adm_Com.DataSource = SortAlphabetDownDB(options);
+                    sortedByAlphabet = !sortedByAlphabet;
+                }
+            }
+            else if (e.ClickedItem == buttonMarkSort)
+            {
+                if (!sortedByMark)
+                {
+                    dataGridView_Adm_Com.DataSource = SortMarkUpDB(options);
+                    sortedByMark = !sortedByMark;
+                }
+                else
+                {
+                    dataGridView_Adm_Com.DataSource = SortMarkDownDB(options);
+                    sortedByMark = !sortedByMark;
+                }
             }
         }
     }

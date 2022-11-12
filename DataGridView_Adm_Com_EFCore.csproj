@@ -215,6 +215,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleContextFactory.cs" />
+    <EmbeddedResource Include="AdmissionCommiteeForm.resx">
+      <DependentUpon>AdmissionCommiteeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EntrantInfoForm.resx">
       <DependentUpon>EntrantInfoForm.cs</DependentUpon>
     </EmbeddedResource>

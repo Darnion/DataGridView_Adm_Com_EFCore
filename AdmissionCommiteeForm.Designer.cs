@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdmissionCommiteeForm));
             this.dataGridView_Adm_Com = new System.Windows.Forms.DataGridView();
             this.FIOColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SexColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,6 +55,10 @@
             this.buttonEdit = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonDelete = new System.Windows.Forms.ToolStripButton();
+            this.buttonSort = new System.Windows.Forms.ToolStripDropDownButton();
+            this.buttonAlphabetSort = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.buttonMarkSort = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Adm_Com)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -182,32 +185,32 @@
             // toolStripMenuItem_Add
             // 
             this.toolStripMenuItem_Add.Name = "toolStripMenuItem_Add";
-            this.toolStripMenuItem_Add.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem_Add.Size = new System.Drawing.Size(128, 22);
             this.toolStripMenuItem_Add.Text = "Добавить";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(125, 6);
             // 
             // toolStripMenuItem_Edit
             // 
             this.toolStripMenuItem_Edit.Enabled = false;
             this.toolStripMenuItem_Edit.Name = "toolStripMenuItem_Edit";
-            this.toolStripMenuItem_Edit.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem_Edit.Size = new System.Drawing.Size(128, 22);
             this.toolStripMenuItem_Edit.Text = "Изменить";
             this.toolStripMenuItem_Edit.Click += new System.EventHandler(this.buttonEdit_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(125, 6);
             // 
             // toolStripMenuItem_Delete
             // 
             this.toolStripMenuItem_Delete.Enabled = false;
             this.toolStripMenuItem_Delete.Name = "toolStripMenuItem_Delete";
-            this.toolStripMenuItem_Delete.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem_Delete.Size = new System.Drawing.Size(128, 22);
             this.toolStripMenuItem_Delete.Text = "Удалить";
             this.toolStripMenuItem_Delete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
@@ -243,7 +246,8 @@
             this.toolStripSeparator1,
             this.buttonEdit,
             this.toolStripSeparator2,
-            this.buttonDelete});
+            this.buttonDelete,
+            this.buttonSort});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -289,6 +293,40 @@
             this.buttonDelete.Size = new System.Drawing.Size(55, 22);
             this.buttonDelete.Text = "Удалить";
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            // 
+            // buttonSort
+            // 
+            this.buttonSort.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.buttonSort.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.buttonAlphabetSort,
+            this.toolStripSeparator5,
+            this.buttonMarkSort});
+            this.buttonSort.Enabled = false;
+            this.buttonSort.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonSort.Name = "buttonSort";
+            this.buttonSort.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.buttonSort.Size = new System.Drawing.Size(103, 22);
+            this.buttonSort.Text = "Отсортировать";
+            this.buttonSort.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.buttonSort_DropDownItemClicked);
+            // 
+            // buttonAlphabetSort
+            // 
+            this.buttonAlphabetSort.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.buttonAlphabetSort.Name = "buttonAlphabetSort";
+            this.buttonAlphabetSort.Size = new System.Drawing.Size(180, 22);
+            this.buttonAlphabetSort.Text = "По алфавиту";
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(177, 6);
+            // 
+            // buttonMarkSort
+            // 
+            this.buttonMarkSort.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.buttonMarkSort.Name = "buttonMarkSort";
+            this.buttonMarkSort.Size = new System.Drawing.Size(180, 22);
+            this.buttonMarkSort.Text = "По сумме баллов";
             // 
             // AdmissionCommiteeForm
             // 
@@ -343,6 +381,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn RussianExamsColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ITExamsColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn SumExamsColumn;
+        private System.Windows.Forms.ToolStripDropDownButton buttonSort;
+        private System.Windows.Forms.ToolStripMenuItem buttonAlphabetSort;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripMenuItem buttonMarkSort;
     }
 }
 
