@@ -59,6 +59,7 @@
             this.buttonAlphabetSort = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonMarkSort = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Adm_Com)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -247,6 +248,7 @@
             this.buttonEdit,
             this.toolStripSeparator2,
             this.buttonDelete,
+            this.toolStripSeparator6,
             this.buttonSort});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
@@ -313,20 +315,25 @@
             // 
             this.buttonAlphabetSort.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.buttonAlphabetSort.Name = "buttonAlphabetSort";
-            this.buttonAlphabetSort.Size = new System.Drawing.Size(180, 22);
+            this.buttonAlphabetSort.Size = new System.Drawing.Size(172, 22);
             this.buttonAlphabetSort.Text = "По алфавиту";
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(169, 6);
             // 
             // buttonMarkSort
             // 
             this.buttonMarkSort.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.buttonMarkSort.Name = "buttonMarkSort";
-            this.buttonMarkSort.Size = new System.Drawing.Size(180, 22);
+            this.buttonMarkSort.Size = new System.Drawing.Size(172, 22);
             this.buttonMarkSort.Text = "По сумме баллов";
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
             // 
             // AdmissionCommiteeForm
             // 
@@ -385,6 +392,7 @@
         private System.Windows.Forms.ToolStripMenuItem buttonAlphabetSort;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem buttonMarkSort;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
     }
 }
 
