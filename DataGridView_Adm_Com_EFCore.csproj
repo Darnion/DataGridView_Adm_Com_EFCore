@@ -218,9 +218,6 @@
     <EmbeddedResource Include="EntrantInfoForm.resx">
       <DependentUpon>EntrantInfoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AdmissionCommiteeForm.resx">
-      <DependentUpon>AdmissionCommiteeForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
