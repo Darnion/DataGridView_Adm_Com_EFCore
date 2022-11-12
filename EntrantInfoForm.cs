@@ -200,6 +200,12 @@ namespace DataGridView_Adm_Com
             }
         }
 
-
+        private void textBoxFIO_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != 8 && !char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }
